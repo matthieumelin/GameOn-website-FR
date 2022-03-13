@@ -44,6 +44,8 @@ img {
 
 .main-navbar {
     float: right;
+    width: 100%;
+    margin: 20px 0 0 0;
 }
 
 .topnav a {
@@ -77,16 +79,19 @@ img {
 }
 
 @media screen and (max-width: 768px) {
+    .topnav {
+        position: relative;
+    }
     .topnav a {
         display: none;
     }
     .topnav a.icon {
         float: right;
         display: block;
+        position: absolute;
+        right: 0;
+        top: 0;
     }
-}
-
-@media screen and (max-width: 768px) {
     .topnav.responsive {
         position: relative;
     }
@@ -109,7 +114,6 @@ img {
     .topnav a.icon {
         float: right;
         display: block;
-        margin-top: -15px;
     }
 }
 
