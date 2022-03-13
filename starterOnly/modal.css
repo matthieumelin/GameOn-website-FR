@@ -418,7 +418,7 @@ input[data-error]::after {
 }
 
 .hero-section {
-    min-height: 93vh;
+    min-height: 50vh;
     border-radius: 10px;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
@@ -479,7 +479,7 @@ input[data-error]::after {
 }
 
 .hero-img img {
-    width: 100%;
+    width: 108%;
     height: 100%;
     display: block;
     padding: 0;
