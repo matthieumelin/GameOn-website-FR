@@ -81,62 +81,7 @@ function validate(event) {
 
   // Si le formulaire ne posséde aucune erreur.
   if (errors.every((error) => !error.active)) {
-    const modalBody = document.querySelector(".modal-body");
-    const modalContent = document.querySelector(".content");
-    if (modalBody && modalContent) {
-      // Création des nouveaux éléments
-      const title = document.createElement("p");
-      const closeButton = document.createElement("button");
 
-      // Intégration des textes sur chaque élément.
-      title.innerText = "Merci ! Votre réservation a été reçue.";
-      closeButton.innerText = "Fermer";
-
-      // Ajout des événements sur les éléments
-      closeButton.addEventListener("click", closeModal);
-
-      // Tous les sous-éléments sont supprimés.
-      modalBody.innerHTML = "";
-
-      // Création du style de chaque élément
-      const modalContentStyle = {
-        margin: "20px auto",
-        height: "100vh",
-        position: "relative",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-      };
-      const titleStyle = {
-        fontSize: "22px",
-        fontWeight: "normal",
-        textAlign: "center",
-      };
-      const buttonStyle = {
-        borderRadius: "8px",
-        border: "none",
-        backgroundColor: "#FE142F",
-        color: "white",
-        padding: "5px 10px",
-        cursor: "pointer",
-        display: "block",
-        margin: "0 auto",
-        position: "absolute",
-        bottom: "20px",
-        left: "0",
-        right: "0",
-        width: "max-content",
-      };
-
-      // Ajout du style sur les éléments
-      Object.assign(title.style, titleStyle);
-      Object.assign(closeButton.style, buttonStyle);
-      Object.assign(modalContent.style, modalContentStyle);
-
-      // Ajout des éléments dans le corps du modal
-      modalBody.appendChild(title);
-      modalBody.appendChild(closeButton);
-    }
   } else {
     // Aucun rafraichissement de page
     event.preventDefault();
