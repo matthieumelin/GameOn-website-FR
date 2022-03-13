@@ -78,45 +78,6 @@ img {
     display: none;
 }
 
-@media screen and (max-width: 768px) {
-    .topnav {
-        position: relative;
-    }
-    .topnav a {
-        display: none;
-    }
-    .topnav a.icon {
-        float: right;
-        display: block;
-        position: absolute;
-        right: 0;
-        top: 0;
-    }
-    .topnav.responsive {
-        position: relative;
-    }
-    .topnav.responsive .icon {
-        position: absolute;
-        right: 0;
-        top: 0;
-    }
-    .topnav.responsive a {
-        float: none;
-        display: block;
-        text-align: left;
-    }
-}
-
-@media screen and (max-width: 540px) {
-    .topnav a {
-        display: none;
-    }
-    .topnav a.icon {
-        float: right;
-        display: block;
-    }
-}
-
 main {
     font-size: 130%;
     font-weight: bolder;
@@ -473,6 +434,7 @@ input[data-error]::after {
     color: #fff;
     position: relative;
     text-align: left;
+    width: 100%;
 }
 
 .hero-content::after {
@@ -577,6 +539,50 @@ footer {
     .copyrights {
         margin-top: 50px;
         text-align: center;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .topnav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .main-navbar {
+        width: unset;
+        margin: 0;
+    }
+    .header-logo {
+        margin: 0;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .topnav {
+        position: relative;
+    }
+    .topnav a {
+        display: none;
+    }
+    .topnav a.icon {
+        float: right;
+        display: block;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .topnav.responsive {
+        position: relative;
+    }
+    .topnav.responsive .icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .topnav.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
     }
 }
 
