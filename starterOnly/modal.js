@@ -34,6 +34,8 @@ reserveForm.addEventListener("submit", (event) => validate(event));
 
 // Fonction qui permet d'envoyer le formulaire
 function validate(event) {
+  event.preventDefault();
+
   // Tableau d'erreurs vide
   const errors = new Array();
 
@@ -65,7 +67,11 @@ function validate(event) {
     errors.push({ id: "email", active: true });
   else errors.push({ id: "email", active: false });
   // Une date d'anniversaire est bien remplie et au moins agé de 16 ans.
-  if (!birthDate || selectedBirthDate.getFullYear() > currentDate.getFullYear() - 16) errors.push({ id: "birthdate", active: true });
+  if (
+    !birthDate ||
+    selectedBirthDate.getFullYear() > currentDate.getFullYear() - 16
+  )
+    errors.push({ id: "birthdate", active: true });
   else errors.push({ id: "birthdate", active: false });
   // Une quantité est bien remplie et correspond bien à une valeure numérique
   if (!quantity || !quantity.match(/^\d+$/) || quantity < 0)
@@ -84,63 +90,30 @@ function validate(event) {
     const modalBody = document.querySelector(".modal-body");
     const modalContent = document.querySelector(".content");
     if (modalBody && modalContent) {
+      reserveForm.style.display = "none";
+
       // Création des nouveaux éléments
       const title = document.createElement("p");
-      const closeButton = document.createElement("button");
+      const closeButton = document.createElement("input");
+      closeButton.type = "submit";
+      closeButton.value = "Fermer";
 
       // Intégration des textes sur chaque élément.
       title.innerText = "Merci ! Votre réservation a été reçue.";
-      closeButton.innerText = "Fermer";
 
       // Ajout des événements sur les éléments
-      closeButton.addEventListener("click", closeModal);
+      closeButton.addEventListener("click", (event) => reserveForm.submit());
 
-      // Tous les sous-éléments sont supprimés.
-      modalBody.innerHTML = "";
-
-      // Création du style de chaque élément
-      const modalContentStyle = {
-        margin: "20px auto",
-        height: "100vh",
-        position: "relative",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-      };
-      const titleStyle = {
-        fontSize: "22px",
-        fontWeight: "normal",
-        textAlign: "center",
-      };
-      const buttonStyle = {
-        borderRadius: "8px",
-        border: "none",
-        backgroundColor: "#FE142F",
-        color: "white",
-        padding: "5px 10px",
-        cursor: "pointer",
-        display: "block",
-        margin: "0 auto",
-        position: "absolute",
-        bottom: "20px",
-        left: "0",
-        right: "0",
-        width: "max-content",
-      };
-
-      // Ajout du style sur les éléments
-      Object.assign(title.style, titleStyle);
-      Object.assign(closeButton.style, buttonStyle);
-      Object.assign(modalContent.style, modalContentStyle);
+      // Ajout des classes de style sur les éléments
+      modalContent.classList.add("content_success");
+      title.classList.add("title");
+      closeButton.classList.add("btn_submit_success");
 
       // Ajout des éléments dans le corps du modal
       modalBody.appendChild(title);
       modalBody.appendChild(closeButton);
     }
   } else {
-    // Aucun rafraichissement de page
-    event.preventDefault();
-
     // Affichage de toutes les erreurs
     errors.forEach((error) => {
       // Récupération de tous les éléments servant à l'affichage des erreurs
