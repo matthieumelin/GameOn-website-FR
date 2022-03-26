@@ -13,6 +13,8 @@ const modalBtn = document.querySelectorAll(".modal-btn");
 const modalCloseBtn = document.querySelector(".close");
 const modalSubmitBtn = document.querySelector(".btn-submit");
 const formData = document.querySelectorAll(".formData");
+// Tableau d'erreurs vide
+const errors = new Array();
 
 // Evenements des boutons du modal
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -26,6 +28,18 @@ function launchModal() {
 // Fonction de fermeture du modal
 function closeModal() {
   modalBg.style.display = "none";
+  reserveForm.reset();
+  errors.forEach((error) => {
+    // Récupération de tous les éléments servant à l'affichage des erreurs
+    const element = document.getElementById(`${error.id}_error`);
+    // L'élément existe
+    if (element != null) {
+      if (error.active) {
+        element.style.display = "none";
+        element.parentNode.setAttribute("data-error-visible", false);
+      }
+    }
+  });
 }
 
 // Ajout de l'événement d'envoi du formulaire
@@ -35,9 +49,6 @@ reserveForm.addEventListener("submit", (event) => validate(event));
 // Fonction qui permet d'envoyer le formulaire
 function validate(event) {
   event.preventDefault();
-
-  // Tableau d'erreurs vide
-  const errors = new Array();
 
   // Entrées du formulaire
   const first = document.getElementById("first").value;
@@ -90,7 +101,7 @@ function validate(event) {
     const modalBody = document.querySelector(".modal-body");
     const modalContent = document.querySelector(".content");
     if (modalBody && modalContent) {
-      reserveForm.style.display = "none";
+      closeModal();
 
       // Création des nouveaux éléments
       const title = document.createElement("p");
