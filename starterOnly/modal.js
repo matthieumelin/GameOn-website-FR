@@ -16,18 +16,8 @@ const formData = document.querySelectorAll(".formData");
 // Tableau d'erreurs vide
 const errors = new Array();
 
-// Evenements des boutons du modal
-modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
-modalCloseBtn.addEventListener("click", closeModal);
-
-// Fonction d'ouverture du modal
-function launchModal() {
-  modalBg.style.display = "block";
-}
-
-// Fonction de fermeture du modal
-function closeModal() {
-  modalBg.style.display = "none";
+// Fonction permettant la mise à zero du formulaire
+function resetForm() {
   reserveForm.reset();
   errors.forEach((error) => {
     // Récupération de tous les éléments servant à l'affichage des erreurs
@@ -42,10 +32,16 @@ function closeModal() {
   });
 }
 
-// Ajout de l'événement d'envoi du formulaire
-const reserveForm = document.getElementById("reserve");
-reserveForm.addEventListener("submit", (event) => validate(event));
+// Fonction d'ouverture du modal
+function launchModal() {
+  modalBg.style.display = "block";
+}
 
+// Fonction de fermeture du modal
+function closeModal() {
+  modalBg.style.display = "none";
+  resetForm();
+}
 // Fonction qui permet d'envoyer le formulaire
 function validate(event) {
   event.preventDefault();
@@ -101,7 +97,7 @@ function validate(event) {
     const modalBody = document.querySelector(".modal-body");
     const modalContent = document.querySelector(".content");
     if (modalBody && modalContent) {
-      closeModal();
+      reserveForm.style.display = "none";
 
       // Création des nouveaux éléments
       const title = document.createElement("p");
@@ -113,7 +109,7 @@ function validate(event) {
       title.innerText = "Merci ! Votre réservation a été reçue.";
 
       // Ajout des événements sur les éléments
-      closeButton.addEventListener("click", (event) => reserveForm.submit());
+      closeButton.addEventListener("click", reserveForm.submit());
 
       // Ajout des classes de style sur les éléments
       modalContent.classList.add("content_success");
@@ -142,3 +138,10 @@ function validate(event) {
     });
   }
 }
+
+// Evenements des boutons du modal
+modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+modalCloseBtn.addEventListener("click", closeModal);
+// Ajout de l'événement d'envoi du formulaire
+const reserveForm = document.getElementById("reserve");
+reserveForm.addEventListener("submit", (event) => validate(event));
